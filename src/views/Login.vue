@@ -77,7 +77,7 @@
       }
     },
     methods: {
-      submitHandler() {
+      async submitHandler() {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
@@ -88,8 +88,11 @@
           password: this.password
         };
 
-        console.log(loginData)
-        this.$router.history.push('/')
+        try {
+          await this.$store.dispatch('login', loginData);
+          this.$router.history.push('/')
+        } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
+
       }
     }
   }

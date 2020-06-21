@@ -52,8 +52,8 @@
       this.dropdown = M.Dropdown.init(this.$refs.dropdown, {constrainWidth: false})
     },
     methods: {
-      logout() {
-        console.log('logout');
+      async logout() {
+        await this.$store.dispatch('logout');
         this.$router.history.push('/login?message=logout')
       }
     },

@@ -95,7 +95,7 @@
       agree: {checked: v => v}
     },
     methods: {
-      submitHandler() {
+      async submitHandler() {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
@@ -107,8 +107,12 @@
           name: this.name
         };
 
-        console.log(regData)
-        this.$router.history.push('/')
+        try {
+          await this.$store.dispatch('register', regData);
+          this.$router.history.push('/')
+        } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
+
+
       }
     }
   }
