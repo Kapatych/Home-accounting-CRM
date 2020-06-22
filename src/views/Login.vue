@@ -7,7 +7,7 @@
           id="email"
           type="text"
           v-model.trim="email"
-          :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+          :class="{invalid: $v.email.$error}"
         >
         <label for="email">Email</label>
         <small class="helper-text invalid" v-if="$v.email.$dirty && !$v.email.required">
@@ -22,7 +22,7 @@
           id="password"
           type="password"
           v-model.trim="password"
-          :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+          :class="{invalid: $v.password.$error}"
         >
         <label for="password">Пароль</label>
         <small class="helper-text invalid" v-if="$v.password.$dirty && !$v.password.required">

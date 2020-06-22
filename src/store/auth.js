@@ -23,7 +23,6 @@ export default {
         commit('setError', e);
         throw e
       }
-
     },
     getUserId() {
       const user = firebase.auth().currentUser;
