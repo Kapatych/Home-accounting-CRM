@@ -4,9 +4,9 @@
     <Navbar @toggleSidebar="sidebarOpen = !sidebarOpen"/>
     <Sidebar v-model="sidebarOpen"/>
 
-
     <main class="app-content" :class="{full: !sidebarOpen}">
-      <div class="app-page">
+      <Loader v-if="loading" />
+      <div class="app-page" v-else>
         <router-view/>
       </div>
     </main>
@@ -26,8 +26,15 @@
   export default {
     name: 'main-layout',
     data: () => ({
-      sidebarOpen: true
+      sidebarOpen: true,
+      loading: true
     }),
+    async mounted() {
+      if (!Object.keys(this.$store.getters.info).length) {
+        await this.$store.dispatch('fetchInfo')
+      }
+      this.loading = false
+    },
     components: {
       Navbar, Sidebar
     }

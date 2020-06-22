@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            USER NAME
+            {{name}}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -50,6 +50,11 @@
       this.interval = setInterval(() => this.date = new Date(), 1000);
       // eslint-disable-next-line no-undef
       this.dropdown = M.Dropdown.init(this.$refs.dropdown, {constrainWidth: false})
+    },
+    computed: {
+      name() {
+        return this.$store.getters.info.name
+      }
     },
     methods: {
       async logout() {
