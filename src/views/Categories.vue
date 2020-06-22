@@ -4,12 +4,18 @@
       <h3>Категории</h3>
     </div>
     <section>
-      <div class="row">
+      <Loader v-if="loading"/>
+      <div class="row" v-else>
         <div class="col s12 m6">
-          <CategoryCreate @categoryCreated="addCategory" />
+          <CategoryCreate @categoryCreated="addCategory"/>
         </div>
         <div class="col s12 m6">
-          <CategoryEdit />
+          <CategoryEdit v-if="categories.length"
+                        :key="categories.length"
+                        :categories="categories"
+                        @categoryUpdated="updateCategory"
+                        @categoryRemoved="removeCategory"/>
+          <p class="center" v-else>Категорий пока нет</p>
         </div>
       </div>
     </section>
@@ -23,12 +29,24 @@
   export default {
     name: 'categories',
     data: () => ({
-      categories: []
+      categories: [],
+      loading: true
     }),
+    async mounted() {
+      this.categories = await this.$store.dispatch('fetchCategories');
+      this.loading = false;
+    },
     methods: {
       addCategory(category) {
         this.categories.push(category)
-        console.log(this.categories)
+      },
+      updateCategory(category) {
+        const index = this.categories.findIndex(cat => cat.id === category.id);
+        this.categories.splice(index, 1, category);
+      },
+      removeCategory(categoryId) {
+        const index = this.categories.findIndex(cat => cat.id === categoryId);
+        this.categories.splice(index, 1);
       }
     },
     components: {CategoryCreate, CategoryEdit}

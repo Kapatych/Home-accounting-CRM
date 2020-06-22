@@ -72,7 +72,7 @@
 
         try {
           const category = await this.$store.dispatch('createCategory', formData);
-          this.$message(`Категория '${this.title}' была создана`);
+          this.$message(`Категория '${this.title}' успешно создана`);
           this.title = '';
           this.limit = this.$v.limit.$params.minValue.min;
           this.$emit('categoryCreated', category);
