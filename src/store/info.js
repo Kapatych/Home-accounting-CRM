@@ -13,6 +13,12 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    async updateInfo({dispatch, commit, getters}, payload) {
+      const uid = await dispatch('getUserId');
+      const updateData = {...getters.info, ...payload};
+      await firebase.database().ref(`/users/${uid}/info`).update(updateData);
+      commit('setInfo', updateData)
     }
   },
   mutations: {
