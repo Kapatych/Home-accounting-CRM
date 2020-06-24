@@ -22,6 +22,8 @@
 <script>
   import Navbar from '@/components/app/Navbar';
   import Sidebar from '@/components/app/Sidebar';
+  import {mapGetters} from 'vuex';
+  import messages from "@/utils/messages";
 
   export default {
     name: 'main-layout',
@@ -29,6 +31,12 @@
       sidebarOpen: true,
       loading: true
     }),
+    computed: mapGetters(['error']),
+    watch: {
+      error(firebaseError) {
+        this.$error(messages[firebaseError.code] || 'Что-то пошло не так')
+      }
+    },
     async mounted() {
       if (!Object.keys(this.$store.getters.info).length) {
         await this.$store.dispatch('fetchInfo')
