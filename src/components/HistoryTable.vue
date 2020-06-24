@@ -13,7 +13,7 @@
 
     <tbody>
     <tr v-for="(record, index) in records" :key="record.id">
-      <td>{{ records.length - index }}</td>
+      <td>{{ startPageNumber - index }}</td>
       <td>{{ record.amount | currency }}</td>
       <td>{{ record.date | date('datetime') }}</td>
       <td>{{ record.categoryName }}</td>
@@ -41,7 +41,8 @@
       records: {
         type: Array,
         require: true
-      }
+      },
+      startPageNumber: Number
     }
   }
 </script>
