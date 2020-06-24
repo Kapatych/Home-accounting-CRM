@@ -34,7 +34,7 @@
   import currencyFilter from '@/filters/currency.filter';
 
   export default {
-    name: 'planning',
+    name: 'Planning',
     data: () => ({
       loading: true,
       categories: []

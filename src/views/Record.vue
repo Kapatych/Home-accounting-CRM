@@ -89,7 +89,7 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    name: 'record',
+    name: 'Record',
     data: () => ({
       loading: true,
       categories: [],

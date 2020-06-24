@@ -26,7 +26,6 @@
   import messages from "@/utils/messages";
 
   export default {
-    name: 'main-layout',
     data: () => ({
       sidebarOpen: true,
       loading: true

@@ -27,7 +27,7 @@
   import CategoryEdit from '@/components/CategoryEdit';
 
   export default {
-    name: 'categories',
+    name: 'Categories',
     data: () => ({
       categories: [],
       loading: true

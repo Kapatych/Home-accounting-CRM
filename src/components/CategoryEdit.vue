@@ -59,7 +59,7 @@
   import {required, minValue} from 'vuelidate/lib/validators';
 
   export default {
-    name: 'category-edit',
+    name: 'CategoryEdit',
     data: () => ({
       select: null,
       title: '',

@@ -46,7 +46,7 @@
   import {required, minValue} from 'vuelidate/lib/validators';
 
   export default {
-    name: 'category-create',
+    name: 'CategoryCreate',
     data: () => ({
       title: '',
       limit: 100

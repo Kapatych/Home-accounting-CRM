@@ -29,7 +29,7 @@
 
 <script>
   export default {
-    name: 'home-currency',
+    name: 'HomeCurrency',
     props: {
       rates: Object,
       date: String

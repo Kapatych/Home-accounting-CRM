@@ -57,7 +57,7 @@
   import messages from '@/utils/messages'
 
   export default {
-    name: 'login',
+    name: 'Login',
     data: () => ({
       email: '',
       password: ''
