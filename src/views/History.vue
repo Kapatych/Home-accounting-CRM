@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{'History' | localize}}</h3>
     </div>
 
     <Loader v-if="loading"/>
 
     <p class="center" v-else-if="!records.length">
-      Записей пока нет.
-      <router-link to="/record">Создать новую запись</router-link>
+      {{'Message_NotRecords' | localize}}
+      <router-link to="/record">{{'Message_AddRecord' | localize}}</router-link>
     </p>
 
     <section v-else>
@@ -22,8 +22,8 @@
                 v-model="page"
                 :page-count="pageCount"
                 :click-handler="changePageHandler"
-                :prev-text="'Назад'"
-                :next-text="'Вперед'"
+                :prev-text="'Prev' | localize"
+                :next-text="'Next' | localize"
                 :container-class="'pagination'" />
     </section>
   </div>
@@ -33,6 +33,7 @@
   import PaginationMixin from "@/mixins/pagination.mixin";
   import HistoryTable from "@/components/HistoryTable";
   import DoughnutChart from "@/components/DoughnutChart";
+  import localizeFilter from '@/filters/localize.filter';
 
   export default {
     name: 'History',
@@ -59,12 +60,13 @@
           labels: this.categories.map(cat => cat.title),
           datasets: [
             {
-              label: 'Расходы по категориям',
+              label: localizeFilter('OutcomeForCategories'),
               data: this.categories.map(cat => {
                 return this.records.reduce((total, rec) => {
                   if (rec.categoryId === cat.id && rec.type === 'outcome') {
                     total += +rec.amount
                   }
+
                   return total
                 }, 0)
               }),
@@ -85,7 +87,7 @@
         ...record,
         categoryName: this.categories.find(c => c.id === record.categoryId).title,
         typeClass: record.type === 'income' ? 'green' : 'red',
-        typeText: record.type === 'income' ? 'Доход' : 'Расход',
+        typeText: record.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome'),
       })).reverse());
 
       this.loading = false;

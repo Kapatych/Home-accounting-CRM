@@ -1,23 +1,24 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>{{'NewRecord' | localize}}</h3>
     </div>
 
-    <Loader v-if="loading" />
+    <Loader v-if="loading"/>
 
     <p class="center" v-else-if="!categories.length">
-      Категорий пока нет. <router-link to="/categories">Создать новую категорию</router-link>
+      {{'Message_NotCategories' | localize}}
+      <router-link to="/categories">{{'Message_AddCategory' | localize}}</router-link>
     </p>
 
     <form class="form" v-else @submit.prevent="submitHandler">
-      <div class="input-field" >
+      <div class="input-field">
         <select ref="select" v-model="currentCategoryId">
           <option v-for="category in categories" :key="category.id" :value="category.id">
             {{category.title}}
           </option>
         </select>
-        <label>Выберите категорию</label>
+        <label>{{'SelectCategory' | localize}}</label>
       </div>
 
       <p>
@@ -29,7 +30,7 @@
             value="income"
             v-model="type"
           />
-          <span>Доход</span>
+          <span>{{'Income' | localize}}</span>
         </label>
       </p>
 
@@ -42,7 +43,7 @@
             value="outcome"
             v-model="type"
           />
-          <span>Расход</span>
+          <span>{{'Outcome' | localize}}</span>
         </label>
       </p>
 
@@ -53,12 +54,12 @@
           v-model.number="amount"
           :class="{invalid: $v.amount.$error}"
         >
-        <label for="amount">Сумма</label>
+        <label for="amount" :class="{active: amount}">{{'Total' | localize}}</label>
         <span class="helper-text invalid" v-if="$v.amount.$dirty && !$v.amount.required">
-          Поле не должно быть пустым
+          {{'Message_FieldNotEmpty' | localize}}
         </span>
         <span class="helper-text invalid" v-if="$v.amount.$dirty && !$v.amount.minValue">
-          Минимальная величина {{$v.amount.$params.minValue.min}}
+           {{'MinValue' | localize}} {{$v.amount.$params.minValue.min}}
         </span>
       </div>
 
@@ -69,14 +70,14 @@
           v-model.trim="description"
           :class="{invalid: $v.description.$error}"
         >
-        <label for="description">Описание</label>
+        <label for="description">{{'Description' | localize}}</label>
         <span class="helper-text invalid" v-if="$v.description.$error">
-          Поле не должно быть пустым
+          {{'Message_FieldNotEmpty' | localize}}
         </span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        {{'Create' | localize}}
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -86,7 +87,8 @@
 <script>
   import M from 'materialize-css';
   import {required, minValue} from 'vuelidate/lib/validators';
-  import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex';
+  import localizeFilter from '@/filters/localize.filter'
 
   export default {
     name: 'Record',
@@ -129,7 +131,7 @@
               date: new Date().toJSON()
             });
 
-            this.$message('Запись успешно создана');
+            this.$message(localizeFilter('RecordHasBeenCreated'));
 
             const bill = this.type === 'income'
               ? this.info.bill + this.amount
@@ -141,7 +143,7 @@
             this.$v.$reset()
           } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
         } else {
-          this.$message(`Недостаточно средств на счете. Остаток средств - ${this.info.bill}`)
+          this.$message(localizeFilter('NotEnoughMoney') + this.info.bill)
         }
       }
     },
@@ -153,7 +155,6 @@
       }
       this.$nextTick(() => {
         this.select = M.FormSelect.init(this.$refs.select);
-        M.updateTextFields()
       })
     },
     beforeDestroy() {

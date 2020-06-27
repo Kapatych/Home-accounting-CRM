@@ -1,3 +1,5 @@
+import store from '../store'
+
 export default (value, format = 'date') => {
   const options = {};
 
@@ -12,6 +14,7 @@ export default (value, format = 'date') => {
     options.minute = '2-digit';
     options.second = '2-digit';
   }
+  const locale = store.getters.info.locale;
 
-  return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value));
+  return new Intl.DateTimeFormat(locale, options).format(new Date(value));
 }
