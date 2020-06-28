@@ -1,5 +1,5 @@
 {
-  "CRM_Title": "Домашняя бухгалтерия",
+  "CRM_Title": "Домашняя бухгалтерия CRM",
   "Profile": "Профиль",
   "Name": "Имя",
   "Message_EnterName": " Введите имя",
@@ -11,6 +11,7 @@
   "CategoryHasBeenCreated": "Категория успешно создана",
   "CategoryHasBeenUpdated": "Категория успешно обновлена",
   "CategoryHasBeenDeleted": "Категория успешно удалена",
+  "Message_NotRecords": "",
   "OpenRecord": "Посмотреть запись",
   "RecordHasBeenCreated": "Запись успешно создана",
   "Message_NotDetail": "Запись не найдена",
@@ -61,5 +62,4 @@
   "WrongPassword": "Неверный пароль",
   "UserNotFound": "Пользователь не найден",
   "EmailUsed": "Этот email занят"
-
 }

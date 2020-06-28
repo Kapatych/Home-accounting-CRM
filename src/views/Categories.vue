@@ -25,9 +25,16 @@
 <script>
   import CategoryCreate from '@/components/CategoryCreate';
   import CategoryEdit from '@/components/CategoryEdit';
+  import localizeFilter from '@/filters/localize.filter';
 
   export default {
     name: 'Categories',
+    metaInfo() {
+      return {
+        title: localizeFilter('Categories'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       categories: [],
       loading: true

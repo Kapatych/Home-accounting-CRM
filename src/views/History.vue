@@ -7,7 +7,7 @@
     <Loader v-if="loading"/>
 
     <p class="center" v-else-if="!records.length">
-      {{'Message_NotRecords' | localize}}
+      {{'Message_NotHistory' | localize}}
       <router-link to="/record">{{'Message_AddRecord' | localize}}</router-link>
     </p>
 
@@ -37,6 +37,12 @@
 
   export default {
     name: 'History',
+    metaInfo() {
+      return {
+        title: localizeFilter('History'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     mixins: [PaginationMixin],
     data: () => ({
       loading: true,

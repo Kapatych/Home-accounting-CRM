@@ -37,6 +37,12 @@
 
   export default {
     name: 'Planning',
+    metaInfo() {
+      return {
+        title: localizeFilter('Planning'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       loading: true,
       categories: []
@@ -65,7 +71,10 @@
             : 'red';
 
         const tooltipValue = cat.limit - spend;
-        const tooltip = (tooltipValue < 0 ? localizeFilter('MoreThan') : localizeFilter('Stayed')) + " " + currencyFilter(Math.abs(tooltipValue));
+        const tooltip = (tooltipValue < 0
+          ? localizeFilter('MoreThan')
+          : localizeFilter('Stayed'))
+          + ` ${currencyFilter(Math.abs(tooltipValue))}`;
 
         return {
           ...cat,

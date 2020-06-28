@@ -27,8 +27,16 @@
 
 
 <script>
+  import localizeFilter from '@/filters/localize.filter';
+
   export default {
     name: 'Detail',
+    metaInfo() {
+      return {
+        title: localizeFilter('Detail'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       loading: true,
       record: null,

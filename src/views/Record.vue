@@ -92,6 +92,12 @@
 
   export default {
     name: 'Record',
+    metaInfo() {
+      return {
+        title: localizeFilter('NewRecord'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       loading: true,
       categories: [],

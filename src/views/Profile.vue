@@ -36,9 +36,16 @@
 <script>
   import {mapGetters, mapActions} from 'vuex';
   import { required } from 'vuelidate/lib/validators';
+  import localizeFilter from '@/filters/localize.filter';
 
   export default {
     name: 'Profile',
+    metaInfo() {
+      return {
+        title: localizeFilter('Profile'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       name: '',
       isRuLocale: true,

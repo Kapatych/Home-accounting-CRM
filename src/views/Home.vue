@@ -17,9 +17,16 @@
 <script>
   import HomeBill from '@/components/HomeBill';
   import HomeCurrency from '@/components/HomeCurrency';
+  import localizeFilter from '@/filters/localize.filter';
 
   export default {
     name: "Home",
+    metaInfo() {
+      return {
+        title: localizeFilter('Account'),
+        titleTemplate: `%s | ${localizeFilter('CRM_Title')}`
+      }
+    },
     data: () => ({
       loading: true,
       currency: null
