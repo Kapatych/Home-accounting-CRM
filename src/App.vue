@@ -10,7 +10,7 @@
   export default {
     computed: {
       layout() {
-        return (this.$route.meta.layout || "main") + '-layout'
+        return (this.$route.meta.layout || "empty") + '-layout'
       }
     },
     components: {EmptyLayout, MainLayout}

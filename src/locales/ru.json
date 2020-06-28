@@ -61,5 +61,6 @@
   "HasLogout": "Вы вышли из системы",
   "WrongPassword": "Неверный пароль",
   "UserNotFound": "Пользователь не найден",
-  "EmailUsed": "Этот email занят"
+  "EmailUsed": "Этот email занят",
+  "PermissionDenied": "Доступ запрещен"
 }

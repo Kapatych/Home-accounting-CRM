@@ -60,5 +60,6 @@
   "HasLogout": "You are logged out",
   "WrongPassword": "Wrong password",
   "UserNotFound": "User is not found",
-  "EmailUsed": "This email is used"
+  "EmailUsed": "This email is used",
+  "PermissionDenied": "Permission denied"
 }
