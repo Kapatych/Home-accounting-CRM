@@ -17,7 +17,7 @@
           <tbody>
           <tr v-for="currency in currencies" :key="currency">
             <td>{{currency}}</td>
-            <td>{{getCurrency(currency) | currency()}}</td>
+            <td>{{getCurrency(currency) | currency}}</td>
             <td>{{date | date('date')}}</td>
           </tr>
           </tbody>
@@ -35,11 +35,11 @@
       date: String
     },
     data: () => ({
-      currencies: ['USD', 'EUR']
+      currencies: ['USD', 'EUR', 'GBP']
     }),
     methods: {
       getCurrency(currency) {
-        return (this.rates['RUB'] / this.rates[currency]).toFixed(2)
+        return (this.rates['RUB'] / (this.rates[currency] || 1))
       }
     }
   }

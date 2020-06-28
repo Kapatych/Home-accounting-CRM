@@ -1,4 +1,5 @@
 {
+  "CRM_Title": "Home accounting",
   "Profile": "Profile",
   "Name": "Name",
   "Message_EnterName": "Enter the name",
@@ -54,6 +55,10 @@
   "ExchangeRates": "Exchange Rates",
   "ExchangeRate": "Rate",
   "Currency": "Currency",
-  "Error": "Error"
-
+  "Error": "Error",
+  "StartLogin": "Login required",
+  "HasLogout": "You are logged out",
+  "WrongPassword": "Wrong password",
+  "UserNotFound": "User is not found",
+  "EmailUsed": "This email is used"
 }

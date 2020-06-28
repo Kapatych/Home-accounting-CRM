@@ -8,6 +8,6 @@ const locales = {
 };
 
 export default (key) => {
-  const locale = store.getters.info.locale || 'ru-RU';
+  const locale = store.getters.info.locale || localStorage.getItem('locale') || 'ru-RU';
   return locales[locale][key] || `[Localize error]: key ${key} not found`
 }
