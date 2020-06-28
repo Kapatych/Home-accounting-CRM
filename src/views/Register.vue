@@ -118,8 +118,6 @@
           await this.$store.dispatch('register', regData);
           this.$router.history.push('/')
         } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
-
-
       }
     }
   }

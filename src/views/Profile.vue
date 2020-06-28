@@ -74,7 +74,6 @@
             locale: this.isRuLocale ? 'ru-RU' : 'en-US'
           });
           localStorage.setItem('locale', this.isRuLocale ? 'ru-RU' : 'en-US');
-
         } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
       }
     },

@@ -17,13 +17,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchCurrency() {
-      const res = await fetch(`https://api.exchangeratesapi.io/latest?base=RUB`);
-      return await res.json();
+    async fetchCurrency({commit}) {
+      try {
+        const res = await fetch(`https://api.exchangeratesapi.io/latest?base=RUB`);
+        return await res.json();
+      } catch (e) {
+        commit('setError', e);
+        throw e
+      }
     }
   },
   getters: {
     error: state => state.error
   },
-  modules: {auth, info, category, record}
+  modules: {
+    auth,
+    info,
+    category,
+    record
+  }
 });
