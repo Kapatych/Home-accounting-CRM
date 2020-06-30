@@ -17,7 +17,7 @@
           <tbody>
           <tr v-for="currency in currencies" :key="currency">
             <td>{{currency}}</td>
-            <td>{{getCurrency(currency) | currency}}</td>
+            <td>{{getCurrency(currency) | currency(info.currency)}}</td>
             <td>{{date | date('date')}}</td>
           </tr>
           </tbody>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
     name: 'HomeCurrency',
     props: {
@@ -35,11 +37,14 @@
       date: String
     },
     data: () => ({
-      currencies: ['USD', 'EUR', 'GBP']
+      currencies: ['RUB', 'USD', 'EUR']
     }),
+    computed: {
+      ...mapGetters(['info'])
+    },
     methods: {
       getCurrency(currency) {
-        return (this.rates['RUB'] / (this.rates[currency] || 1))
+        return ( (this.rates[this.info.currency] || 1) / (this.rates[currency] || 1) )
       }
     }
   }

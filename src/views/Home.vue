@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
   import HomeBill from '@/components/HomeBill';
   import HomeCurrency from '@/components/HomeCurrency';
   import localizeFilter from '@/filters/localize.filter';
@@ -31,14 +32,17 @@
       loading: true,
       currency: null
     }),
+    computed: {
+      ...mapGetters(['info'])
+    },
     async mounted() {
-      this.currency = await this.$store.dispatch('fetchCurrency');
+      this.currency = await this.$store.dispatch('fetchCurrency', this.info.currency);
       this.loading = false;
     },
     methods: {
       async refresh() {
         this.loading = true;
-        this.currency = await this.$store.dispatch('fetchCurrency');
+        this.currency = await this.$store.dispatch('fetchCurrency', this.info.currency);
         this.loading = false;
       }
     },

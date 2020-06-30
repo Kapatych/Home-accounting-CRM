@@ -14,7 +14,7 @@
     <tbody>
     <tr v-for="(record, index) in records" :key="record.id">
       <td>{{ startPageNumber - index }}</td>
-      <td>{{ record.amount | currency }}</td>
+      <td>{{ record.amount | currency(info.currency) }}</td>
       <td>{{ record.date | date('datetime') }}</td>
       <td>{{ record.categoryName }}</td>
       <td>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
     props: {
       records: {
@@ -40,6 +42,9 @@
         require: true
       },
       startPageNumber: Number
-    }
+    },
+    computed: {
+      ...mapGetters(['info'])
+    },
   }
 </script>

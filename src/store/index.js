@@ -17,9 +17,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchCurrency({commit}) {
+    async fetchCurrency({commit}, base) {
       try {
-        const res = await fetch(`https://api.exchangeratesapi.io/latest?base=RUB`);
+        const res = await fetch(`https://api.exchangeratesapi.io/latest?base=${base}`);
         return await res.json();
       } catch (e) {
         commit('setError', e);
