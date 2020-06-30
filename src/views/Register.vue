@@ -44,12 +44,56 @@
           {{'Message_FieldNotEmpty' | localize}}
         </small>
       </div>
-      <p>
-        <label>
-          <input type="checkbox" v-model="agree" />
-          <span>{{'AcceptRules' | localize}}</span>
-        </label>
-      </p>
+
+      <div class="row">
+        <div class="col s6">
+          <div class="input-field">
+            <input
+              id="startBill"
+              type="number"
+              v-model.number="startBill"
+              :class="{invalid: $v.startBill.$error}"
+            >
+            <label for="startBill" :class="{active: startBill}"> {{'StartBill' | localize}}</label>
+            <span class="helper-text invalid" v-if="$v.startBill.$dirty && !$v.startBill.required">
+            {{'Message_FieldNotEmpty' | localize}}
+          </span>
+            <span class="helper-text invalid" v-if="$v.startBill.$dirty && !$v.startBill.minValue">
+            {{'MinValue' | localize}} {{$v.startBill.$params.minValue.min}}
+          </span>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="input-field">
+            <select ref="select" v-model="currency">
+              <option v-for="currency in ['RUB', 'USD', 'EUR']" :key="currency" :value="currency">
+                {{currency}}
+              </option>
+            </select>
+            <label>{{'SelectCurrency' | localize}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <div class="switch">
+            <label>
+              English
+              <input type="checkbox" v-model="isRuLocale" @change="changeSwitchHandler">
+              <span class="lever"></span>
+              Русский
+            </label>
+          </div>
+        </div>
+        <div class="col s6">
+          <p>
+            <label>
+              <input type="checkbox" v-model="agree" />
+              <span>{{'AcceptRules' | localize}}</span>
+            </label>
+          </p>
+        </div>
+      </div>
     </div>
     <div class="card-action">
       <div>
@@ -71,7 +115,7 @@
 </template>
 
 <script>
-  import {email, required, minLength} from 'vuelidate/lib/validators'
+  import {email, required, minLength, minValue} from 'vuelidate/lib/validators'
   import localizeFilter from '@/filters/localize.filter';
 
   export default {
@@ -86,7 +130,10 @@
       email: '',
       password: '',
       name: '',
-      agree: false
+      startBill: 1,
+      currency: 'RUB',
+      agree: false,
+      isRuLocale: true,
     }),
     validations: {
       email: {
@@ -99,26 +146,48 @@
       name: {
         required
       },
+      startBill: {
+        required,
+        minValue: minValue(1)
+      },
       agree: {checked: v => v}
     },
+    mounted() {
+      M.FormSelect.init(this.$refs.select); // eslint-disable-line no-undef
+    },
     methods: {
+      changeSwitchHandler() {
+        localStorage.setItem('locale', this.isRuLocale ? 'ru-RU' : 'en-US');
+      },
       async submitHandler() {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
         }
 
+        const locale = this.isRuLocale ? 'ru-RU' : 'en-US';
+
         const regData = {
           email: this.email,
           password: this.password,
-          name: this.name
+          name: this.name,
+          bill: this.startBill,
+          currency: this.currency,
+          locale,
         };
 
         try {
           await this.$store.dispatch('register', regData);
-          this.$router.history.push('/')
+          localStorage.setItem('locale', locale);
+          this.$router.history.push('/');
         } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
       }
     }
   }
 </script>
+
+<style scoped>
+  .row {
+    margin: 0 -0.75rem;
+  }
+</style>

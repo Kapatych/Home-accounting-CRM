@@ -61,5 +61,7 @@
   "WrongPassword": "Wrong password",
   "UserNotFound": "User is not found",
   "EmailUsed": "This email is used",
-  "PermissionDenied": "Permission denied"
+  "PermissionDenied": "Permission denied",
+  "StartBill": "Opening bill",
+  "SelectCurrency": "Select currency"
 }

@@ -11,14 +11,15 @@ export default {
         throw e
       }
     },
-    async register({dispatch, commit}, {email, password, name}) {
+    async register({dispatch, commit}, {email, password, name, bill, currency, locale}) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
         const uid = await dispatch('getUserId');
         await firebase.database().ref(`users/${uid}/info`).set({
-          bill: 10000,
           name,
-          locale: 'ru-RU',
+          bill,
+          currency,
+          locale
         })
       } catch (e) {
         commit('setError', e);

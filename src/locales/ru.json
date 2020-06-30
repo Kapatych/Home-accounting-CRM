@@ -62,5 +62,7 @@
   "WrongPassword": "Неверный пароль",
   "UserNotFound": "Пользователь не найден",
   "EmailUsed": "Этот email занят",
-  "PermissionDenied": "Доступ запрещен"
+  "PermissionDenied": "Доступ запрещен",
+  "StartBill": "Начальный счет",
+  "SelectCurrency": "Выберите валюту"
 }

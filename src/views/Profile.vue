@@ -68,12 +68,14 @@
           return;
         }
 
+        const locale = this.isRuLocale ? 'ru-RU' : 'en-US';
+
         try {
           await this.updateInfo({
             name: this.name,
-            locale: this.isRuLocale ? 'ru-RU' : 'en-US'
+            locale
           });
-          localStorage.setItem('locale', this.isRuLocale ? 'ru-RU' : 'en-US');
+          localStorage.setItem('locale', locale);
         } catch (e) {} // eslint-disable-line no-useless-catch, no-empty
       }
     },
