@@ -2,6 +2,9 @@
 
 [Demo](https://vue-crm-27ecc.web.app/)
 
+## Screenshots
+![Screenshot_2020-07-01 Счет Домашняя бухгалтерия CRM(1)](https://user-images.githubusercontent.com/58704804/86186711-6da53280-bb42-11ea-8173-b19ef255680c.png)
+
 ## Features
 
 + Authorization (firebase)
